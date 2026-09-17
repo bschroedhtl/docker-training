@@ -1,0 +1,26 @@
+services:
+  web-1:
+    image: nginx
+    container_name: webA
+    ports:
+      - 8081:80
+    volumes:
+      - ../webA:/usr/share/nginx/html
+    networks:
+      - my-web-network
+  web-2:
+    image: nginx
+    container_name: webB
+    ports:
+      - 8082:80
+    volumes:
+      - ../webB:/usr/share/nginx/html
+    networks:
+      - my-web-network
+networks:
+  my-web-network:
+    name: my-web-network
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.2.0.0/16

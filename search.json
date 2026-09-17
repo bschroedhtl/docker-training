@@ -1,0 +1,775 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Docker",
+    "section": "",
+    "text": "Introduction\nIntroduction to Docker",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "index.html#what-is-docker",
+    "href": "index.html#what-is-docker",
+    "title": "Docker",
+    "section": "What is Docker?",
+    "text": "What is Docker?\n\nProduct/Company that made Container technology very popular\nProducts\n\nDocker Engine: the open-source container runtime and CLI (free)\nDocker Desktop: GUI application including Docker Engine for Windows, macOS and Linux (free for personal use, education and small businesses; larger companies need a paid subscription)\n\nIs available on all major platforms\nLearn more in Docker docs…",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "index.html#docker-versus-virtual-machine",
+    "href": "index.html#docker-versus-virtual-machine",
+    "title": "Docker",
+    "section": "Docker versus Virtual Machine",
+    "text": "Docker versus Virtual Machine\n\n\n\n\n\n\n\n\n\n\n\n\n\nIn classical Virtual Machines (VM),\n\n\neach VM runs its own guest operating system\n\n\nconsuming tens of GB of data\n\n\n\n\nContainers\n\n\nreuse the host operating system\n\n\nrun in user space\n\n\nconsume only tens of MB of data\n\n\n\n\n\nImage Source and more information…",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "index.html#installation",
+    "href": "index.html#installation",
+    "title": "Docker",
+    "section": "Installation",
+    "text": "Installation\n\nDocker Desktop (Windows)\n\nWSL2 (Windows Subsystem for Linux - Version 2)\nDocker Desktop for Windows\n\n\n\nDocker on Linux Ubuntu\n\nInstall docker with convenience script\n\nFine for learning and test environments, but not recommended by Docker for production systems (use the apt repository there)\n\nPost installation step: Add your user (eg. ubuntu) to the docker group, so you can run docker without sudo\n\nsudo usermod -aG docker ubuntu\nnewgrp docker\n\nTest with docker run hello-world\n\n\n\nWhich terminal should I use? (Windows)\nUse PowerShell (e.g. the VS Code terminal) for all exercises. Docker Desktop must be running.\nIf you use Git Bash instead, two things go wrong:\n\ndocker run -it ... and docker exec -it ... fail with the input device is not a TTY. Fix: put winpty in front of the command, e.g. winpty docker run -it ubuntu bash.\nPaths like /bin/bash are converted into Windows paths. Fix: write bash instead of /bin/bash, or write //bin/bash.",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "index.html#docker-terms",
+    "href": "index.html#docker-terms",
+    "title": "Docker",
+    "section": "Docker Terms",
+    "text": "Docker Terms\n\n\n\nTerm\nDescription\nMain commands\n\n\n\n\nDocker Image\nA read-only template which contains everything needed to run an application as a container. Consists of several layers.\ndocker images lists all images available in the local image cache (pulled or built before).\n\n\nDocker Container\nA single runtime instance of a docker image. From one image, a lot of containers can be started and stopped, with individual execution parameters (e.g. for the port mapping of a container).\ndocker ps lists all running docker containers\ndocker ps -a including stopped containers\n\n\nDocker Registry\nA registry stores and distributes docker images. Docker Hub is the default registry and hosts a huge number of public images including usage documentation and version histories. It can also be used for managing private docker images. Besides Docker Hub, there are a lot of other container registries, e.g. the GitHub Container Registry (ghcr.io).\ndocker pull, docker push\n\n\nDockerfile\nA text file containing commands for building a new docker image. Instructions that change the file system (like RUN and COPY) each add a new image layer. Dockerfile syntax uses instructions like FROM for referring a base image, RUN for executing a shell command, COPY for copying files from the local file system into the image, and CMD for specifying the start command of the application which will be executed whenever a container from that image is started.\ndocker build -t &lt;image-name&gt; .\n\n\nDocker Compose\nA tool for defining and running multi-container applications in a YAML file\ndocker compose up\ndocker compose down",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "index.html#chapters",
+    "href": "index.html#chapters",
+    "title": "Docker",
+    "section": "Chapters",
+    "text": "Chapters\n\nContainers\nBuilding images from Dockerfiles\nContainer Orchestration with docker compose",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "index.html#cleaning-up",
+    "href": "index.html#cleaning-up",
+    "title": "Docker",
+    "section": "Cleaning up",
+    "text": "Cleaning up\nClean up after each exercise. Otherwise, old containers keep using ports and names, and the next exercise fails.\n\n\n\n\n\n\n\nWhat\nCommand\n\n\n\n\nShow all containers (also stopped ones)\ndocker ps -a\n\n\nStop and remove a container\ndocker rm -f &lt;name-or-id&gt;\n\n\nStop and remove a compose project\ndocker compose down (in the compose folder)\n\n\nRemove all stopped containers, unused networks and dangling images\ndocker system prune",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "index.html#troubleshooting",
+    "href": "index.html#troubleshooting",
+    "title": "Docker",
+    "section": "Troubleshooting",
+    "text": "Troubleshooting\n\n\n\nError message\nCause\nFix\n\n\n\n\nCannot connect to the Docker daemon / error during connect\nDocker Desktop is not running\nStart Docker Desktop and wait until it says “Engine running”\n\n\nthe input device is not a TTY\nYou use Git Bash\nUse PowerShell, or put winpty in front of the command (see above)\n\n\nport is already allocated / address already in use\nAnother container (or program) already uses this host port\ndocker ps → remove the old container, or choose another host port (left side of -p)\n\n\nThe container name \"/...\" is already in use\nA container with this name still exists (maybe stopped)\ndocker rm -f &lt;name&gt;, or docker compose down in the folder of the other exercise\n\n\nPort 3306 or 80 is taken although no container runs\nA local program (e.g. XAMPP MySQL/Apache) uses the port\nStop that program, or use another host port\n\n\nBrowser shows nothing / “connection refused”\nWrong port, or the container has stopped\nCheck the PORTS column in docker ps; check docker logs &lt;name&gt;",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "content/01-containers/Readme.html",
+    "href": "content/01-containers/Readme.html",
+    "title": "1  Container commands",
+    "section": "",
+    "text": "1.1 Interactive container",
+    "crumbs": [
+      "Containers",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Container commands</span>"
+    ]
+  },
+  {
+    "objectID": "content/01-containers/Readme.html#interactive-container",
+    "href": "content/01-containers/Readme.html#interactive-container",
+    "title": "1  Container commands",
+    "section": "",
+    "text": "docker run --name helloDocker -i -t ubuntu /bin/bash\n           |                  |  |  |      |\n           |                  |  |  |      +-- Command to run\n           |                  |  |  +--------- Image to start the container from\n           |                  |  +------------ Allocate a pseudo-TTY\n           |                  +--------------- Keep STDIN open (-i -t is usually written as -it)\n           +---------------------------------- Name of container\n\n1.1.1 Exercise:\n\nRun this command =&gt; ubuntu image will be downloaded to the local image cache and a bash prompt is opened.\nInspect the running ubuntu instance via the bash terminal, for example:\n\nhostname - which name does the container have?\ncat /etc/os-release - which Linux version is running inside?\nps aux - which processes are running? (only very few - compare with your own computer!)\nls / - the container has its own file system\n\nUse another terminal to inspect\n\nthe running docker instance with docker ps - note the container id is the same as displayed in the bash prompt =&gt; by default, the (short) container id is used as the host name of the container.\ndocker images will display the downloaded ubuntu image.\n\nExit the container instance with typing exit in the bash prompt.\n\nThis also stops the container: a container only runs as long as its main process (here: bash) runs.\nUse docker ps -a to list all containers, including stopped ones.\nUse docker start &lt;container-id&gt; to restart the stopped container. You can see it now running again with docker ps, however you are not connected with the bash terminal.\nUse docker attach &lt;container-id&gt; to attach your terminal to the bash prompt again.",
+    "crumbs": [
+      "Containers",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Container commands</span>"
+    ]
+  },
+  {
+    "objectID": "content/01-containers/Readme.html#background-process",
+    "href": "content/01-containers/Readme.html#background-process",
+    "title": "1  Container commands",
+    "section": "1.2 Background process",
+    "text": "1.2 Background process\ndocker run -d ubuntu /bin/bash -c \"while true; do echo hello world; sleep 1; done\"\n           |\n           +---- Detached (= background server process)\n\n1.2.1 Exercise:\n\nInspect the running container with docker ps =&gt; note the container-id.\nUse docker logs &lt;container-id&gt; to view the output of the bash command that is running in the container.\nUse docker stop &lt;container-id&gt; to stop this container.\nUse docker ps -a to list the stopped container as well as all other running containers.\nUse docker rm &lt;container-id&gt; to remove the stopped container.\n\n\n\n1.2.2 Notes\n\nIt is sufficient to enter only the first few characters of the container id - as long as this prefix is unique and docker is thus able to identify the container.\nYou can remove a still running container by using the force option: docker rm -f &lt;container-id&gt;.",
+    "crumbs": [
+      "Containers",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Container commands</span>"
+    ]
+  },
+  {
+    "objectID": "content/01-containers/Readme.html#nginx-webserver",
+    "href": "content/01-containers/Readme.html#nginx-webserver",
+    "title": "1  Container commands",
+    "section": "1.3 Nginx Webserver",
+    "text": "1.3 Nginx Webserver\ndocker container run is the long form of docker run - both commands do the same.\ndocker container run -d -p 8080:80 --name my-webserver nginx\n                     |  |          |                   |\n                     |  |          |                   +------- Image, from which the container is started\n                     |  |          +--------------------------- Option to specify the container name\n                     |  +-------------------------------------- Publish container port 80 (where nginx listens)\n                     |                                          on port 8080 of the host\n                     +----------------------------------------- detached mode (running in background)\n\n1.3.1 Exercise\n\nRun this command\nList the container with docker ps: It should display\n\nthe correct port mapping from the host port 8080 to the container port 80\nas well as the image nginx\nand the requested container name my-webserver \n\nCheck your image cache with docker images (nginx image should have been pulled from Docker Hub)\nConnect to the web service from your favourite browser via http://localhost:8080. It should display the default index.html for nginx: \nCheck the logging of your client connection with docker logs my-webserver (we can now use the container name instead of the container-id)\nCheck the processes running inside this container with docker top my-webserver\nStop and restart the web service with docker stop and docker start\nStop the web service again with docker stop my-webserver, then remove it with docker rm my-webserver (docker rm refuses to remove a running container)",
+    "crumbs": [
+      "Containers",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Container commands</span>"
+    ]
+  },
+  {
+    "objectID": "content/01-containers/Readme.html#bind-mounts",
+    "href": "content/01-containers/Readme.html#bind-mounts",
+    "title": "1  Container commands",
+    "section": "1.4 Bind Mounts",
+    "text": "1.4 Bind Mounts\nFor publishing a local html folder in your nginx container, you need to specify a bind mount with the -v option (alternatively: --mount type=bind,source=...,target=...):\n\nNote the colon : between the local folder and the folder inside the container!\nIf your local folder looks like following, your web browser will display your individual index.html file after connecting to this new web service:\nC\n+- htl\n   +- docker\n      +- wwwroot\n         +- index.html\nThe command from the picture, to copy (with port 8081, so it does not collide with my-webserver from above):\ndocker run -d -p 8081:80 -v C:/htl/docker/wwwroot:/usr/share/nginx/html --name my-bind-webserver nginx\nTip: This repository already contains a folder 01-containers/wwwroot with an index.html. If you open a PowerShell terminal in the 01-containers folder, you can use it with ${PWD} (= current folder):\ndocker run -d -p 8081:80 -v ${PWD}/wwwroot:/usr/share/nginx/html --name my-bind-webserver nginx\n(On Linux / macOS, write $(pwd) instead of ${PWD}.)\n\n1.4.1 Exercise:\n\nCreate folder structure + index.html file (or use the wwwroot folder of this repository)\nStart a new container with a bind mount and a new port mapping - e.g. with 8081 instead of 8080\nContact this web service with your favourite browser: http://localhost:8081 should show your index.html, not the nginx default page\nUse docker inspect to inspect the properties of the new container\nUse docker stats to inspect the performance statistics\nUse docker logs to access the web server log messages\nUse docker exec -it &lt;id&gt; bash to connect to the container in interactive tty mode with a bash terminal. Navigate to the /usr/share/nginx/html folder to inspect the mounted files.\nEdit the index.html file on your host file system, save it and refresh your browser to see the changed content.\nAdd additional files to the mounted folder and check, if they are reachable via your web browser.\nClean up: docker rm -f my-bind-webserver",
+    "crumbs": [
+      "Containers",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Container commands</span>"
+    ]
+  },
+  {
+    "objectID": "content/01-containers/Readme.html#check-yourself",
+    "href": "content/01-containers/Readme.html#check-yourself",
+    "title": "1  Container commands",
+    "section": "1.5 Check yourself",
+    "text": "1.5 Check yourself\nWhen you have finished all exercises, take the self-check quiz for this chapter: 5 short questions, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.",
+    "crumbs": [
+      "Containers",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Container commands</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/Readme.html",
+    "href": "content/02-dockerfiles/Readme.html",
+    "title": "2  Docker Images",
+    "section": "",
+    "text": "2.1 Image Operations",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Docker Images</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/Readme.html#image-operations",
+    "href": "content/02-dockerfiles/Readme.html#image-operations",
+    "title": "2  Docker Images",
+    "section": "",
+    "text": "Operation\nDocker CLI command\n\n\n\n\nList images\ndocker images\n\n\nSearch images\ndocker search\n\n\nPull image from Docker Hub\ndocker pull\n\n\nPush image to Docker Hub\ndocker push",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Docker Images</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/Readme.html#important-images",
+    "href": "content/02-dockerfiles/Readme.html#important-images",
+    "title": "2  Docker Images",
+    "section": "2.2 Important Images",
+    "text": "2.2 Important Images\nImages important for this course\n\n\n\nImage\nDescription\n\n\n\n\nubuntu\nUbuntu Linux OS\n\n\nnode\nBase image for Node.js applications\n\n\nnginx\nWebserver, reverse proxy, load balancer, etc.\n\n\neclipse-temurin\nBase image for Java applications (JDK and JRE)\n\n\nmysql\nMySQL database",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Docker Images</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/Readme.html#create-image-from-a-container",
+    "href": "content/02-dockerfiles/Readme.html#create-image-from-a-container",
+    "title": "2  Docker Images",
+    "section": "2.3 Create Image from a Container",
+    "text": "2.3 Create Image from a Container\nUnusual, but possible: Modify a container and save it to a new image.\n\n2.3.1 Step 1: Nginx with Live-Editing\nInstead of mapping a local folder into an nginx container, we could also edit the index.html file inside the container by means of a linux editor like nano.\n\nStart a plain nginx container: docker run -p 8082:80 -d --name editable-webserver nginx\nExecute a bash terminal in the container: docker exec -it editable-webserver bash\nNavigate to the folder containing the index.html: cd /usr/share/nginx/html\nTry to edit this file: nano index.html\n\nnano is not installed in the very slim base image for nginx, hence we need to install it first …\ncat or more would be available, but this doesn’t help\n\nInstall nano:\n\nFirst, package lists must be updated, since the base image doesn’t contain any: apt update\nNext, we can install nano: apt install nano.\nNote that apt install asks for confirmation. Auto-answer with yes with the option -y: apt install -y nano\n\nNow edit index.html with nano, save the changes and reload the page in the browser.\n\n\n\n2.3.2 Step 2: Save modified container to image\nFor each new container started from the base image nginx, those changes would be lost. But we can store the modifications done in the container to a new image layer:\n\nExit the container bash\nCommit the container changes to a new image (docker commit): docker commit -m \"change-description\" &lt;container-id&gt; &lt;image-name&gt;\n\nwhere image-name could be nginx-editable\n\nInspect the new image with docker images and note the difference in size compared to the original base image nginx, resulting from the nano package installed.\n\n\n\n2.3.3 Step 3: Start a new container\n\nRun a new container from the new image: docker run -p 8083:80 -d nginx-editable\nTest it on port 8083\n\nYou should see the modified index.html\nIf executing a bash inside the new container, you can use nano to edit files",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Docker Images</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/Readme.html#dockerfile",
+    "href": "content/02-dockerfiles/Readme.html#dockerfile",
+    "title": "2  Docker Images",
+    "section": "2.4 Dockerfile",
+    "text": "2.4 Dockerfile\nThe most common way to build an image is using a Dockerfile. See the Dockerfile reference.\n\n2.4.1 Dockerfile Syntax\n\n\n\n\n\n\n\n\nInstruction\nDescription\nExample\n\n\n\n\nFROM\nA new image is always built based on another image, at minimum FROM scratch. This reference image will be extended with the given Dockerfile\nFROM nginx\n\n\nRUN\nOne or more shell commands to be executed while building the image. Referring to the previous example, we could do the package update and install commands here. Since each RUN statement results in a distinct image layer, we can save effort by combining several commands with &&. In Dockerfiles, apt-get is preferred over apt, since apt is meant for interactive use.\nRUN apt-get update && apt-get install -y nano\n\n\nWORKDIR\nSets the working directory for all subsequent instructions (and for the running container). If the folder does not yet exist, it will be created.\nWORKDIR /usr/share/nginx/html\n\n\nCOPY\nTo make specific files or folder appear in a future container of the new image, they must be copied from the build context (the folder passed to docker build) into the image. For example, a prepared web root folder can be copied into the nginx html folder. Source paths are always relative to the build context, destination paths are relative to the WORKDIR of the image (unless absolute). So COPY . . copies the whole build context into the current working directory of the image.\nCOPY . .\n\n\nEXPOSE\nA Dockerfile might declare the container port on which the service will be listening after startup. This does not publish the port, it mainly serves as documentation. This is very useful for a successful port mapping in the docker run command, since the right part of a port mapping must refer to the container port.\nEXPOSE 80 (e.g., for a typical web server)\n\n\nCMD\nUsually the last instruction in a Dockerfile, which specifies the default command to start the application. This command is executed each time a container of this image is started, unless another command is passed to docker run. The preferred exec form is written as JSON array.\nCMD [\"node\", \"app.js\"] (for a node application)",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Docker Images</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/Readme.html#dockerfile-exercises",
+    "href": "content/02-dockerfiles/Readme.html#dockerfile-exercises",
+    "title": "2  Docker Images",
+    "section": "2.5 Dockerfile Exercises",
+    "text": "2.5 Dockerfile Exercises\n\nHello World\nStatic Web Page\n\nSelf-check: quiz on Dockerfile basics (overview, exercises 1 and 2)\n\nJavascript Express Backend\nJava Server Multistage Build\n\nSelf-check: quiz on app images and multi-stage builds (exercises 3 and 4)\n\nTypescript Backend\nTypescript Frontend hosted with nginx\n\nSelf-check: quiz on the TypeScript backend and frontend images (exercises 5 and 6)",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Docker Images</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/01-alpine-hello-world/Readme.html",
+    "href": "content/02-dockerfiles/01-alpine-hello-world/Readme.html",
+    "title": "3  First Dockerfile",
+    "section": "",
+    "text": "3.1 Dockerfile\nNote:",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>First Dockerfile</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/01-alpine-hello-world/Readme.html#dockerfile",
+    "href": "content/02-dockerfiles/01-alpine-hello-world/Readme.html#dockerfile",
+    "title": "3  First Dockerfile",
+    "section": "",
+    "text": "FROM alpine\nCMD [\"echo\", \"hello world\"]\n\n\nCMD is written here in the recommended exec form (JSON array). It could also be written in shell form: CMD echo hello world, which runs the command via /bin/sh -c.",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>First Dockerfile</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/01-alpine-hello-world/Readme.html#build-image",
+    "href": "content/02-dockerfiles/01-alpine-hello-world/Readme.html#build-image",
+    "title": "3  First Dockerfile",
+    "section": "3.2 Build Image",
+    "text": "3.2 Build Image\n\nNavigate to the folder where the Dockerfile resides\nRun:\n\ndocker build -t my-hello-world .\n       |     |                 |\n       |     |                 +--- Current directory is passed as build context:\n       |     |                      contains all files/folders which shall be copied,\n       |     |                      and (by default) the Dockerfile\n       |     +--------------------- Name (and optional tag, e.g. my-hello-world:1.0)\n       |                            for the new image; the tag defaults to `latest`\n       +--------------------------- docker command for building an image from a Dockerfile\n\n\nInspect your image cache with docker images",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>First Dockerfile</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/01-alpine-hello-world/Readme.html#run-a-new-container",
+    "href": "content/02-dockerfiles/01-alpine-hello-world/Readme.html#run-a-new-container",
+    "title": "3  First Dockerfile",
+    "section": "3.3 Run a new Container",
+    "text": "3.3 Run a new Container\n\nRun a container from this image with docker run my-hello-world\nNotes:\n\nno port mapping since the image is not a long-running server application\nno detached mode (-d) since we want to see the output in the terminal\nthe container exits immediately after the echo command is completed (see CMD)",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>First Dockerfile</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/02-static-web-page/Readme.html",
+    "href": "content/02-dockerfiles/02-static-web-page/Readme.html",
+    "title": "4  Publish Static Web Page",
+    "section": "",
+    "text": "4.1 Dockerfile\nNote:",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Publish Static Web Page</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/02-static-web-page/Readme.html#dockerfile",
+    "href": "content/02-dockerfiles/02-static-web-page/Readme.html#dockerfile",
+    "title": "4  Publish Static Web Page",
+    "section": "",
+    "text": "FROM nginx\nWORKDIR /usr/share/nginx/html\nCOPY public .\n\n\nEXPOSE 80 is already declared in the base nginx image.\nCOPY refers on the source side to the folder public in the build context, on the destination side to the current working directory of the image which has been set correctly in the line above with WORKDIR.\nCMD is already declared in the base nginx image, we don’t need to repeat it here.",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Publish Static Web Page</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/02-static-web-page/Readme.html#build-image",
+    "href": "content/02-dockerfiles/02-static-web-page/Readme.html#build-image",
+    "title": "4  Publish Static Web Page",
+    "section": "4.2 Build Image",
+    "text": "4.2 Build Image\ndocker build -t my-static-page .",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Publish Static Web Page</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/02-static-web-page/Readme.html#run-container",
+    "href": "content/02-dockerfiles/02-static-web-page/Readme.html#run-container",
+    "title": "4  Publish Static Web Page",
+    "section": "4.3 Run Container",
+    "text": "4.3 Run Container\ndocker run -p 8084:80 -d --name my-static-page-container my-static-page",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Publish Static Web Page</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/02-static-web-page/Readme.html#test",
+    "href": "content/02-dockerfiles/02-static-web-page/Readme.html#test",
+    "title": "4  Publish Static Web Page",
+    "section": "4.4 Test",
+    "text": "4.4 Test\n\nOpen http://localhost:8084 in your browser: you should see the Home page.\nClick the links Galery (with six city pictures) and Contact - all files of the public folder are inside the image now.\nUnlike the bind mount in chapter 01, changing a file in public does not change the page. Try it! You have to build the image again and start a new container.\nClean up: docker rm -f my-static-page-container",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Publish Static Web Page</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/02-static-web-page/Readme.html#check-yourself",
+    "href": "content/02-dockerfiles/02-static-web-page/Readme.html#check-yourself",
+    "title": "4  Publish Static Web Page",
+    "section": "4.5 Check yourself",
+    "text": "4.5 Check yourself\nYou have finished the first two Dockerfile exercises. Take the self-check quiz on Dockerfile basics: 5 short questions about the chapter overview, Hello World and this exercise, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Publish Static Web Page</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/03-js-express/Readme.html",
+    "href": "content/02-dockerfiles/03-js-express/Readme.html",
+    "title": "5  Javascript Express Backend",
+    "section": "",
+    "text": "5.1 Dockerfile\nWhat do you need to build a simple node.js express backend service in your local development environment?\nAll those steps can be packaged into a docker image, so there is no local Node.js installation required anymore =&gt; the app can run wherever docker is installed.",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Javascript Express Backend</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/03-js-express/Readme.html#dockerfile",
+    "href": "content/02-dockerfiles/03-js-express/Readme.html#dockerfile",
+    "title": "5  Javascript Express Backend",
+    "section": "",
+    "text": "FROM node:24 - Node.js is required. Always specify a version tag, otherwise you get whatever latest currently is.\nWORKDIR /app - Creates a new folder where we will store the app including the node_modules\nCOPY . . - Copies app.js, package.json from the build context into the app folder of this image\nRUN npm install - Creates package-lock.json and node_modules\nEXPOSE 3000 - Declares that our express service will listen on container port 3000 after startup\nCMD [\"node\", \"app.js\"] - Finally declares how to startup the express service",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Javascript Express Backend</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/03-js-express/Readme.html#build-the-image",
+    "href": "content/02-dockerfiles/03-js-express/Readme.html#build-the-image",
+    "title": "5  Javascript Express Backend",
+    "section": "5.2 Build the Image",
+    "text": "5.2 Build the Image\n… you should know already how …\n\nCheck the image size with docker images. Why is it so big? (Keep the number in mind for the next exercises.)",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Javascript Express Backend</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/03-js-express/Readme.html#start-a-container",
+    "href": "content/02-dockerfiles/03-js-express/Readme.html#start-a-container",
+    "title": "5  Javascript Express Backend",
+    "section": "5.3 Start a container",
+    "text": "5.3 Start a container\n… you should know already how … - publish the container port 3000, e.g. -p 3000:3000.",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Javascript Express Backend</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/03-js-express/Readme.html#test",
+    "href": "content/02-dockerfiles/03-js-express/Readme.html#test",
+    "title": "5  Javascript Express Backend",
+    "section": "5.4 Test",
+    "text": "5.4 Test\n\nOpen http://localhost:3000 in your browser. It should display Hello World!\ndocker logs &lt;container&gt; should show Example app listening on port 3000!",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Javascript Express Backend</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/03-js-express/Readme.html#dockerignore",
+    "href": "content/02-dockerfiles/03-js-express/Readme.html#dockerignore",
+    "title": "5  Javascript Express Backend",
+    "section": "5.5 Dockerignore",
+    "text": "5.5 Dockerignore\nNote the file .dockerignore which excludes files matching the given rules from the build context, so COPY (and ADD) cannot copy them into the image.\nHence we can avoid that files like Readme.md and the Dockerfile itself will be copied to the image, since they are not needed for running the application. Even more important: a local node_modules folder is excluded too, so it cannot overwrite the dependencies installed by npm install inside the image.\nRefer to https://docs.docker.com/build/concepts/context/#dockerignore-files",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Javascript Express Backend</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/04-java-socket-server/Readme.html",
+    "href": "content/02-dockerfiles/04-java-socket-server/Readme.html",
+    "title": "6  Multistage Dockerfiles",
+    "section": "",
+    "text": "6.1 Java EchoServer\nThis Java program launches a server listening on incoming connections on port 9001. It will answer with some greeting and then echoes all text communication which is sent from the client terminal.\nWhat is relevant for dockerizing this service:",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Multistage Dockerfiles</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/04-java-socket-server/Readme.html#java-echoserver",
+    "href": "content/02-dockerfiles/04-java-socket-server/Readme.html#java-echoserver",
+    "title": "6  Multistage Dockerfiles",
+    "section": "",
+    "text": "Internal port for the port mapping: 9001\nHow to compile a Java source file: javac compiler which is part of JDK\nHow to run the Java Bytecode file to launch the program: java which is part of the java runtime jre",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Multistage Dockerfiles</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/04-java-socket-server/Readme.html#dockerfile",
+    "href": "content/02-dockerfiles/04-java-socket-server/Readme.html#dockerfile",
+    "title": "6  Multistage Dockerfiles",
+    "section": "6.2 Dockerfile",
+    "text": "6.2 Dockerfile\nSince a full JDK environment is much larger than the java runtime itself, we save effort and file size by separating the image build process into two distinct stages (multi-stage build):\n\nBuild Stage for compiling the .class bytecode file from the .java source file\nRun Stage for preparing the execution environment for launching the bytecode file with jre\n\n\n6.2.1 Stage 1: Build Stage\nFROM eclipse-temurin:21-jdk AS builder\nWORKDIR /app\nCOPY EchoServer.java ./\nRUN javac *.java\nNote:\n\nThis build stage is named builder, so the next stage can refer to it.\nThe former openjdk images are deprecated on Docker Hub, eclipse-temurin is a recommended replacement.\nThis stage won’t be part of the final image after the docker build is complete =&gt; image file size is minimized.\n\n\n\n6.2.2 Stage 2: Run Stage\nFROM eclipse-temurin:21-jre\nWORKDIR /app\nCOPY --from=builder /app/EchoServer.class .\nEXPOSE 9001\nCMD [\"java\", \"EchoServer\"]\nNotes:\n\nFinal image only requires jre environment\nBytecode file is copied from the previous build stage\nEXPOSE 9001 documents the port the echo server listens on\nStartup command calls the java program and passes the class name EchoServer (without the .class extension) as an argument.",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Multistage Dockerfiles</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/04-java-socket-server/Readme.html#build-the-image",
+    "href": "content/02-dockerfiles/04-java-socket-server/Readme.html#build-the-image",
+    "title": "6  Multistage Dockerfiles",
+    "section": "6.3 Build the Image",
+    "text": "6.3 Build the Image\n… you know how …",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Multistage Dockerfiles</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/04-java-socket-server/Readme.html#run-a-container",
+    "href": "content/02-dockerfiles/04-java-socket-server/Readme.html#run-a-container",
+    "title": "6  Multistage Dockerfiles",
+    "section": "6.4 Run a Container",
+    "text": "6.4 Run a Container\n… you know how … - don’t forget to publish port 9001, e.g. -p 9001:9001.",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Multistage Dockerfiles</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/04-java-socket-server/Readme.html#test-the-program",
+    "href": "content/02-dockerfiles/04-java-socket-server/Readme.html#test-the-program",
+    "title": "6  Multistage Dockerfiles",
+    "section": "6.5 Test the program",
+    "text": "6.5 Test the program\n\nLaunch a terminal and create a client connection with the telnet command: telnet localhost 9001\n\nOn Windows, telnet is not installed by default. Either enable the Windows feature “Telnet Client” or use another TCP client like PuTTY (connection type “Raw”).",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Multistage Dockerfiles</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/04-java-socket-server/Readme.html#check-yourself",
+    "href": "content/02-dockerfiles/04-java-socket-server/Readme.html#check-yourself",
+    "title": "6  Multistage Dockerfiles",
+    "section": "6.6 Check yourself",
+    "text": "6.6 Check yourself\nYou have finished exercises 3 and 4. Take the self-check quiz on app images and multi-stage builds: 5 short questions about the Express backend and this Java multi-stage build, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Multistage Dockerfiles</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/05-ts-backend/Readme.html",
+    "href": "content/02-dockerfiles/05-ts-backend/Readme.html",
+    "title": "7  TypeScript Backend Dockerfile",
+    "section": "",
+    "text": "7.1 Fruits Rest-Api\nGiven is the already known sample for the Fruits Rest-Api with following changes:",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>TypeScript Backend Dockerfile</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/05-ts-backend/Readme.html#fruits-rest-api",
+    "href": "content/02-dockerfiles/05-ts-backend/Readme.html#fruits-rest-api",
+    "title": "7  TypeScript Backend Dockerfile",
+    "section": "",
+    "text": "requests.http:\n\nIntroduced variable for HOSTNAME so we can edit the host name and port in a single place, if someone maps the container port to a different external port than 3000.\n\npackage.json:\n\nadded build script for the build stage\ninstalled missing cors dependencies\n\ntsconfig.json:\n\nset outDir to dist folder so the js files will be transpiled into this folder.\nThus, we can keep the files required for launching the program in a separate folder, which makes copying easier.",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>TypeScript Backend Dockerfile</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/05-ts-backend/Readme.html#dockerfile",
+    "href": "content/02-dockerfiles/05-ts-backend/Readme.html#dockerfile",
+    "title": "7  TypeScript Backend Dockerfile",
+    "section": "7.2 Dockerfile",
+    "text": "7.2 Dockerfile\nA typescript app involves a compilation (transpilation) step, which needs the full node image including npm and the TypeScript compiler. For launching the transpiled app.js file, however, only the Node.js runtime is required. Google’s distroless images contain nothing but the runtime (no shell, no package manager), so the final image is only a fraction of the size of the full node image (check the difference with docker images).\n\nRefer to: https://github.com/GoogleContainerTools/distroless\n\nSo it definitely makes sense to split the Dockerfile into two stages.\n\n7.2.1 Step 1: Build Stage\n\nFROM node:24 AS builder:\n\nFull node image (including npm) for building\nWrite AS in upper case like FROM, otherwise docker build prints a FromAsCasing warning\n\nWORKDIR /app:\n\nWe will install and transpile into this folder\n\nCOPY ./package*.json ./:\n\nFirst, only copy package.json and package-lock.json (if present) from the build context into the image.\nThis reduces build time for later docker builds: docker caches each build step and reuses it, as long as the files copied in this step have not changed. So npm install only runs again if the dependencies changed.\n\nRUN npm install:\n\ncreates node_modules in app folder\n\nCOPY . .:\n\nNow, all the rest is copied from the build context into the image, including tsconfig.json and the ts source files.\nThe .dockerignore file makes sure that a local node_modules or dist folder is not copied, since it would overwrite the folders created inside the image.\n\nRUN npm run build:\n\nJavascript files are transpiled into /app/dist folder\n\n\n\n\n7.2.2 Step 2: Run Stage\n\nFROM gcr.io/distroless/nodejs24-debian12\n\nFor running the javascript files, a small distroless image containing only the Node.js 24 runtime is used.\n\nWORKDIR /app\n\nAgain, we define a common base folder for the program\n\nCOPY --from=builder /app/dist .\n\nCopy js files\n\nCOPY --from=builder /app/node_modules ./node_modules\n\nCopy js dependencies\n\nEXPOSE 3000\n\nDeclare the port on which our express application listens\n\nCMD [\"app.js\"]\n\nThe base image for this stage already defines node as entrypoint for the startup command, therefore we only need to specify the path to the main js file in CMD\nNote the dist folder only exists in the build stage, we have copied all contents of this folder from the build stage to the current working directory /app.",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>TypeScript Backend Dockerfile</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/05-ts-backend/Readme.html#build-run-test",
+    "href": "content/02-dockerfiles/05-ts-backend/Readme.html#build-run-test",
+    "title": "7  TypeScript Backend Dockerfile",
+    "section": "7.3 Build, run, test",
+    "text": "7.3 Build, run, test\ncd src\ndocker build -t fruit-backend .\ndocker run -p 3000:3000 -d fruit-backend\nTest the endpoints in VS Code with requests.http. This needs the VS Code extension REST Client: click Send Request above a request.\n\nGET http://localhost:3000/api/fruits should return [\"apple\",\"banana\",\"peach\"].\nQuick check without VS Code: open http://localhost:3000/api/fruits in your browser.",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>TypeScript Backend Dockerfile</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/06-ts-frontend/Readme.html",
+    "href": "content/02-dockerfiles/06-ts-frontend/Readme.html",
+    "title": "8  Hosting Dynamic Website with nginx",
+    "section": "",
+    "text": "8.1 Fruit Rest Client\nAgain we use the already known small rest client for consuming the Fruit Rest-Api from a web page.\nFollowing adaptations in the source code have been done:",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Hosting Dynamic Website with nginx</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/06-ts-frontend/Readme.html#fruit-rest-client",
+    "href": "content/02-dockerfiles/06-ts-frontend/Readme.html#fruit-rest-client",
+    "title": "8  Hosting Dynamic Website with nginx",
+    "section": "",
+    "text": "public folder added\n\nMoved index.html into this folder\nChanged tsconfig.json to generate the index.js transpilation output into this folder\n\npackage.json file added\n\nfor installing typescript compiler in the docker node image\n\nnginx.conf file added\n\nIt overrides the default nginx configuration: every URL which does not match an existing file is answered with index.html (try_files). This is needed for single-page applications with client-side routing.",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Hosting Dynamic Website with nginx</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/06-ts-frontend/Readme.html#dockerfile",
+    "href": "content/02-dockerfiles/06-ts-frontend/Readme.html#dockerfile",
+    "title": "8  Hosting Dynamic Website with nginx",
+    "section": "8.2 Dockerfile",
+    "text": "8.2 Dockerfile\nThe setup is again separated into two stages:\n\nWe need to use node as base image for generating the transpilation output index.js.\nFor the run stage, we don’t use node, but nginx as web server, which hosts both the html and javascript files =&gt; therefore we put all our application files into the common public folder. This folder will then be hosted by nginx.\n\n\n8.2.1 Step 1: Build Stage\nThe build stage is basically the same as for the typescript backend application:\nFROM node:24 AS builder\nWORKDIR /app\nCOPY ./package*.json ./\nRUN npm install\nCOPY . .\nRUN npm run build\n\n\n8.2.2 Step 2: Run Stage\nSince we have created all what nginx needs for hosting the web page into the folder /app/public in the build stage, the only thing we need to do is to copy this folder into the web root folder of nginx: /usr/share/nginx/html.\nFROM nginx\nCOPY ./nginx.conf /etc/nginx/conf.d/default.conf\nCOPY --from=builder /app/public /usr/share/nginx/html\nNote:\n\nNo EXPOSE 80 or CMD required, these statements are already declared in the nginx base image.\nOverriding the default.conf is only required if your web application uses client-side routing (a single-page application with several URL routes). A plain static site works with the default configuration.",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Hosting Dynamic Website with nginx</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/06-ts-frontend/Readme.html#build-run-test",
+    "href": "content/02-dockerfiles/06-ts-frontend/Readme.html#build-run-test",
+    "title": "8  Hosting Dynamic Website with nginx",
+    "section": "8.3 Build, run, test",
+    "text": "8.3 Build, run, test\ncd src\ndocker build -t fruit-frontend .\ndocker run -p 8888:80 -d fruit-frontend\nTest the URL http://localhost:8888 in your browser.\n\nYou should see five buttons. With the backend from the previous exercise running on port 3000, GET /api/fruits shows apple,banana,peach.\nNow stop the backend container and click the buttons again. Most buttons show nothing new on the page (the two .../0 buttons show fruit not found). Open the browser developer tools (F12 → tab Console) to see the real error messages.\nThe JavaScript code runs in your browser, not in the container. Hence it calls the backend via http://localhost:3000, and the backend container must publish port 3000 on your host.\n\n\n8.3.1 Browser localhost vs. container localhost\n\n\nThe browser asks your computer for localhost:8888. Docker forwards this request to port 80 of the frontend container (nginx).\nnginx sends back index.html and index.js. From now on, nobody in the frontend container runs this code - it runs in your browser.\nWhen you click a button, index.js calls http://localhost:3000/api/fruits. For the browser, localhost is your computer, so the request goes to host port 3000, which Docker forwards to the backend container.\nThe backend answers with JSON.\n\nRemember: localhost always means the machine (or container) where the code is running. Inside a container, localhost is the container itself. The frontend container has no backend on port 3000, so it would not help to call the backend from there.\nQuestion: What happens if you start the backend with -p 3001:3000? What would you have to change?",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Hosting Dynamic Website with nginx</span>"
+    ]
+  },
+  {
+    "objectID": "content/02-dockerfiles/06-ts-frontend/Readme.html#check-yourself",
+    "href": "content/02-dockerfiles/06-ts-frontend/Readme.html#check-yourself",
+    "title": "8  Hosting Dynamic Website with nginx",
+    "section": "8.4 Check yourself",
+    "text": "8.4 Check yourself\nYou have finished exercises 5 and 6 (think about the question above first). Take the self-check quiz on the TypeScript backend and frontend images: 5 short questions, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.",
+    "crumbs": [
+      "Dockerfiles",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Hosting Dynamic Website with nginx</span>"
+    ]
+  },
+  {
+    "objectID": "content/03-docker-compose/Readme.html",
+    "href": "content/03-docker-compose/Readme.html",
+    "title": "9  Container Orchestration with docker compose",
+    "section": "",
+    "text": "Stuck or have a question? Ask the AI tutor for this chapter. It knows this chapter and all its exercises, and helps you with compose files, networks, volumes and error messages. For the exercises where you write the compose file yourself, it gives you hints, not the solution. You can ask in German or English.\n\n\nCompose a single container\nCompose multiple containers and networks\n\nSelf-check: quiz on compose basics and networks (exercises 1 and 2)\n\nDB containers and persistent volumes\nWordpress, phpMyAdmin, mariadb\n\nSelf-check: quiz on volumes, databases and WordPress (exercises 3 and 4)\n\nFull Typescript Stack (coming soon)",
+    "crumbs": [
+      "Docker Compose",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Container Orchestration with `docker compose`</span>"
+    ]
+  },
+  {
+    "objectID": "content/03-docker-compose/01-compose-single-container/Readme.html",
+    "href": "content/03-docker-compose/01-compose-single-container/Readme.html",
+    "title": "10  Composing a single container",
+    "section": "",
+    "text": "10.1 compose.yaml\nIn the container section, we have tested a docker run command for publishing a local folder through an nginx container and mapping the internal nginx port 80 to the external host port 8080:\nWith docker compose, we can specify such docker run configurations in a text file and use this file to start and stop (or remove) a single or multiple containers.\nRefer to:\nThe default file name for a compose file is compose.yaml (preferred) or compose.yml. The older names docker-compose.yaml and docker-compose.yml are still supported for backwards compatibility.\nNote:\nNote:",
+    "crumbs": [
+      "Docker Compose",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Composing a single container</span>"
+    ]
+  },
+  {
+    "objectID": "content/03-docker-compose/01-compose-single-container/Readme.html#compose.yaml",
+    "href": "content/03-docker-compose/01-compose-single-container/Readme.html#compose.yaml",
+    "title": "10  Composing a single container",
+    "section": "",
+    "text": "Older compose files often start with a version: element. It is obsolete and should be omitted.\n\nservices:\n\nFirst statement is - with no indentation, starting at the very first character - the services: section, which allows to specify one or more containers (=&gt; services) to be managed.\nAfter this line, you need to indent with spaces (usually 2)! YAML does not allow TAB characters for indentation.\n\n  web:\n\nNext, we declare the service name web for the one and only container, which will be managed by this compose file.\nAll subsequent mappings for this service are again indented (2 more spaces)\n\n    image: nginx\n\nThe most important service mapping is of course, on which image this container should be based.\nSo we define nginx with no tag, thus, the tag latest is used (which usually points to the newest stable version).\n\n\n\nInstead of an image, which would be pulled from Docker Hub, we could also specify image build options with a build mapping, since docker compose can also involve a docker build to create the container image on the fly.\nMore on this later.\n\n    ports:\n      - 8080:80\n\nA container usually represents a background server process and listens on one or more ports. These are called the container ports.\nHence, port mappings are specified in form of a list with each element started with - in a distinct row.\nIn our example, the nginx container port 80 is published on the host port 8080, similar to the port mapping we have done with the docker run command in the terminal.\n\n    volumes:\n      - ./wwwroot:/usr/share/nginx/html\n\nFinally, the bind mount of a local host folder to the default nginx web root folder is configured as one element for the volumes mapping, very similar to the -v option of the docker run command.\nNote that compose resolves a relative path relative to the folder of the compose file.",
+    "crumbs": [
+      "Docker Compose",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Composing a single container</span>"
+    ]
+  },
+  {
+    "objectID": "content/03-docker-compose/01-compose-single-container/Readme.html#startup-docker-compose-up",
+    "href": "content/03-docker-compose/01-compose-single-container/Readme.html#startup-docker-compose-up",
+    "title": "10  Composing a single container",
+    "section": "10.2 Startup: docker compose up",
+    "text": "10.2 Startup: docker compose up\nIf you cd into the directory, where the compose.yaml file resides, and call the docker compose up command there, you will first get following information in your terminal:\n\nFollowing two steps happened:\n\ndocker compose creates a separate docker network for you.\n\nAs long as no specific docker network is configured in the compose file, this network is called &lt;project-name&gt;_default. The project name defaults to the name of the folder containing the compose file.\nYou can inspect this network with the command docker network ls, listing both the default docker networks and specific networks created manually or by means of docker compose:\n\nbridge (where containers started manually with docker run will reside)\nhost and none for special network use cases\nand now also the 01-compose-single-container_default network.\n\nNote the NETWORK_ID of your new network.\n\ndocker compose started the single service as specified in the compose file for you:\n\nWe did not ask for a specific container name, hence the project name (= folder name) is used, followed by the service name web and the instance number 1.\nWe did not assign this container to a specific network, so it is assigned to the default network belonging to this compose file.\n\n\n\n10.2.1 Network Inspection\nYou can inspect your docker network with docker network inspect &lt;network-id&gt;:\n\nHere you can see following:\n\nNetwork properties like the Name\nIP configuration for this network including\n\nsubnet\ngateway\n\nAll containers which have been assigned to this network including their IP address.\n\nAs you can see in the graphic below, a container can also be assigned to more than one docker networks:\n\n\n\nSee also:\n\nhttps://docs.docker.com/engine/network/drivers/bridge/\n\n\n\n10.2.2 Background versus Foreground\nSince we started our docker compose in foreground mode, the terminal is attached to the log outputs of all containers of this compose project.\nTo stop the containers,\n\nyou can either press Ctrl+C in the terminal, which will stop but not remove the containers.\nor you open another terminal, cd into the compose folder and type docker compose down. In this case, the containers are not only stopped, but also removed, together with the networks created by compose.\n\n\n\n10.2.3 Background mode: docker compose up -d\nTo start the containers in background (detached) mode, use the -d option of the up command: docker compose up -d. Note that -d must be written after up, since it is an option of the up sub-command.\nRefer to https://docs.docker.com/reference/cli/docker/compose/up/",
+    "crumbs": [
+      "Docker Compose",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Composing a single container</span>"
+    ]
+  },
+  {
+    "objectID": "content/03-docker-compose/02-compose-multiple-containers/Readme.html",
+    "href": "content/03-docker-compose/02-compose-multiple-containers/Readme.html",
+    "title": "11  Exercise: Compose container network",
+    "section": "",
+    "text": "11.1 Instructions\nTwo different web root folders are given\nYou shall create a file compose.yaml in this folder (next to webA and webB) for managing two nginx containers:\nHints:\nOnly if you are stuck: a solution is in solution/compose.yaml. Start it from this folder with docker compose -f solution/compose.yaml up -d (and stop it with docker compose -f solution/compose.yaml down).",
+    "crumbs": [
+      "Docker Compose",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Exercise: Compose container network</span>"
+    ]
+  },
+  {
+    "objectID": "content/03-docker-compose/02-compose-multiple-containers/Readme.html#instructions",
+    "href": "content/03-docker-compose/02-compose-multiple-containers/Readme.html#instructions",
+    "title": "11  Exercise: Compose container network",
+    "section": "",
+    "text": "The services should be called web-1 and web-2.\nThe first should have the container_name webA, the second webB.\nThe first should be mapped to port 8081, the second to 8082.\nThe first should serve the folder webA (bind mount, like in the previous exercise), the second the folder webB.\nBoth should be assigned to a specific network called my-web-network.\nThis network should specify a specific IPAM config with the subnet 10.2.0.0/16\n\n\n\nNetworks are declared in a top-level networks: section, similar to services:. Look up the syntax in the compose reference: networks (see name, driver and ipam).\nEach service lists the networks it belongs to in its own networks: list.\nWithout name:, compose would put the folder name in front of the network name.\nTest: http://localhost:8081 should show the A-service, http://localhost:8082 the B-service.",
+    "crumbs": [
+      "Docker Compose",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Exercise: Compose container network</span>"
+    ]
+  },
+  {
+    "objectID": "content/03-docker-compose/02-compose-multiple-containers/Readme.html#expected-terminal-output",
+    "href": "content/03-docker-compose/02-compose-multiple-containers/Readme.html#expected-terminal-output",
+    "title": "11  Exercise: Compose container network",
+    "section": "11.2 Expected Terminal Output",
+    "text": "11.2 Expected Terminal Output\n\n11.2.1 docker compose up -d\n - Network my-web-network  Created\n - Container webB          Started\n - Container webA          Started\n\n\n11.2.2 docker ps\nCONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS                                     NAMES\n60d5c2755d53   nginx     \"/docker-entrypoint.…\"   6 minutes ago   Up 6 minutes   0.0.0.0:8082-&gt;80/tcp, [::]:8082-&gt;80/tcp   webB\nc1e104106b4b   nginx     \"/docker-entrypoint.…\"   6 minutes ago   Up 6 minutes   0.0.0.0:8081-&gt;80/tcp, [::]:8081-&gt;80/tcp   webA\n\n\n\n11.2.3 docker compose down\n - Container webA          Removed\n - Container webB          Removed\n - Network my-web-network  Removed",
+    "crumbs": [
+      "Docker Compose",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Exercise: Compose container network</span>"
+    ]
+  },
+  {
+    "objectID": "content/03-docker-compose/02-compose-multiple-containers/Readme.html#inter-container-communication",
+    "href": "content/03-docker-compose/02-compose-multiple-containers/Readme.html#inter-container-communication",
+    "title": "11  Exercise: Compose container network",
+    "section": "11.3 Inter-Container-Communication",
+    "text": "11.3 Inter-Container-Communication\nBoth containers reside in the same user-defined bridge network, and docker provides automatic DNS resolution for such networks. This means containers inside the same network can contact each other using either their IP addresses or their host names (=&gt; which are actually their service and/or container names)!\nNote:\n\nThis DNS resolution only works in user-defined networks (like the ones created by compose). Containers in the default bridge network can only reach each other by IP address.\nRefer to https://docs.docker.com/engine/network/drivers/bridge/\n\nWe can experience this by using the ping utility.\n\n11.3.1 Execute bash in webA\nWe connect our terminal to the webA container with\ndocker exec -it webA bash\nHowever, the ping command is not found. So we need to install it in our container:\napt update\napt install -y iputils-ping\nFinally, we are able to ping orf.at and get according ping statistics.\n\n\n11.3.2 ping webB\nNow we can ping our neighbour container named webB and get the following output:\nroot@a4074b8a929b:/# ping webB\nPING webB (10.2.0.2) 56(84) bytes of data.\n64 bytes from webB.my-web-network (10.2.0.2): icmp_seq=1 ttl=64 time=0.066 ms\n(Your IP address may be different, e.g. 10.2.0.3 - docker picks a free address from the subnet. Stop ping with Ctrl+C.)\nAlso working:\n\nping 10.2.0.2 (using the internal ip address shown in your ping output)\nping web-2 (using the service name instead of container_name)\n\nQuestion: After docker compose down and docker compose up -d, is ping still installed in webA? Why (not)?",
+    "crumbs": [
+      "Docker Compose",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Exercise: Compose container network</span>"
+    ]
+  },
+  {
+    "objectID": "content/03-docker-compose/02-compose-multiple-containers/Readme.html#check-yourself",
+    "href": "content/03-docker-compose/02-compose-multiple-containers/Readme.html#check-yourself",
+    "title": "11  Exercise: Compose container network",
+    "section": "11.4 Check yourself",
+    "text": "11.4 Check yourself\nYou have finished compose exercises 1 and 2 (think about the question above first). Take the self-check quiz on compose basics and networks: 5 short questions, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.",
+    "crumbs": [
+      "Docker Compose",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Exercise: Compose container network</span>"
+    ]
+  },
+  {
+    "objectID": "content/03-docker-compose/03-db-phpmyadmin/Readme.html",
+    "href": "content/03-docker-compose/03-db-phpmyadmin/Readme.html",
+    "title": "12  DB Containers / Persistent Volumes",
+    "section": "",
+    "text": "12.1 Volume declaration\nEspecially for hosting a database container, the data managed by the DBMS should survive a container life cycle.\nThis means, if someone shuts down the container with docker compose down or manually removes the database container with docker rm -f ..., we would like to see the same data after launching a new database container.\nFor this, we need to map the file path inside the db container, where all the database files are stored internally, to a volume, which persists independently of the container.\nThis file path depends on the DBMS, for instance for mysql it is /var/lib/mysql\nSimilar to a service or network declaration, a volume declaration in a compose file looks like this:\nIn a terminal, the corresponding command would be docker volume create mysql-data. Compose creates the volume automatically, if it does not exist yet.\nDocker-managed volumes can also be inspected and deleted manually:",
+    "crumbs": [
+      "Docker Compose",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>DB Containers / Persistent Volumes</span>"
+    ]
+  },
+  {
+    "objectID": "content/03-docker-compose/03-db-phpmyadmin/Readme.html#volume-declaration",
+    "href": "content/03-docker-compose/03-db-phpmyadmin/Readme.html#volume-declaration",
+    "title": "12  DB Containers / Persistent Volumes",
+    "section": "",
+    "text": "volumes:\n  data:\n    name: mysql-data\n\n\n\ndocker volume ls\ndocker volume inspect mysql-data\ndocker volume rm mysql-data (be careful!)",
+    "crumbs": [
+      "Docker Compose",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>DB Containers / Persistent Volumes</span>"
+    ]
+  },
+  {
+    "objectID": "content/03-docker-compose/03-db-phpmyadmin/Readme.html#volume-mapping-for-a-mysql-container",
+    "href": "content/03-docker-compose/03-db-phpmyadmin/Readme.html#volume-mapping-for-a-mysql-container",
+    "title": "12  DB Containers / Persistent Volumes",
+    "section": "12.2 Volume mapping for a mysql container",
+    "text": "12.2 Volume mapping for a mysql container\nservices:\n  mysql:\n    image: mysql:8.4\n    container_name: dev_mysql\n    environment:\n      MYSQL_USER: user\n      MYSQL_PASSWORD: user\n      MYSQL_ROOT_PASSWORD: root\n      MYSQL_DATABASE: userDB\n    volumes:\n      - data:/var/lib/mysql\nWith this volume mapping, the container internal path /var/lib/mysql is mapped to the docker-managed volume data (named mysql-data, according to the volume declaration above).\nNote:\n\nStill, you could map a local host path on the left side, by specifying a relative or absolute file path instead of the name of a volume.\nThis is called a bind mount, whereas mapping to a docker-managed volume is called a named volume.\nIn the first case, the files are accessible very easily, you can browse them in the local file system. But this is also more dangerous, since you could delete some files by accident.\nIn the second case, the files are managed by docker and stored in a part of the host file system which is managed by docker (/var/lib/docker/volumes/ on Linux, inside the Docker Desktop VM on Windows/macOS), so it is not easy at all to delete them by accident.\n\nRefer to:\n\nhttps://docs.docker.com/engine/storage/ (overview of volumes, bind mounts and tmpfs mounts)\nhttps://docs.docker.com/engine/storage/volumes/",
+    "crumbs": [
+      "Docker Compose",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>DB Containers / Persistent Volumes</span>"
+    ]
+  },
+  {
+    "objectID": "content/03-docker-compose/03-db-phpmyadmin/Readme.html#phpmyadmin",
+    "href": "content/03-docker-compose/03-db-phpmyadmin/Readme.html#phpmyadmin",
+    "title": "12  DB Containers / Persistent Volumes",
+    "section": "12.3 phpMyAdmin",
+    "text": "12.3 phpMyAdmin\nWith the DNS resolution inside a docker network, a good practice for database management in docker is to hide a DBMS docker container from the external world, while only neighbour containers inside the same docker network are able to contact this DBMS.\nNote:\n\nDuring development, you might still want to publish the database port, so you can inspect your tables with a database tool on your host (see exercise below).\n\nWe test this security feature by setting up a second container using the phpmyadmin image, which is basically a web server providing a user interface for browsing a relational database. This web service uses PHP to communicate with the DBMS container, and for this, network traffic inside the docker network is sufficient!\nNote:\n\nThat’s the reason why the mysql container does not specify a port mapping, hence it is not reachable from outside!\n\n\n12.3.1 pma Container\n  phpmyadmin:\n    image: phpmyadmin\n    container_name: dev_pma\n    environment:\n      PMA_HOST: mysql\n      PMA_PORT: 3306\n      PMA_ARBITRARY: 1\n    restart: always\n    ports:\n      - 8183:80\nDuring startup of a phpMyAdmin container, this application refers to several environment variables. Those can easily be specified in a compose file:\n\nPMA_HOST: Hostname or IP address of the DBMS which shall be browsed\nPMA_PORT: By default, a mysql database listens on port 3306 for incoming client connections\nPMA_ARBITRARY:\n\nIf set to 0, the web interface is fixed to the given PMA_HOST. In the login dialog, you are only asked for username and password.\nIf set to 1, the web interface is allowed to connect to arbitrary DBMS hosts. In the login dialog, you can also enter the PMA_HOST which shall be connected, in addition to username and password.",
+    "crumbs": [
+      "Docker Compose",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>DB Containers / Persistent Volumes</span>"
+    ]
+  },
+  {
+    "objectID": "content/03-docker-compose/03-db-phpmyadmin/Readme.html#first-booting",
+    "href": "content/03-docker-compose/03-db-phpmyadmin/Readme.html#first-booting",
+    "title": "12  DB Containers / Persistent Volumes",
+    "section": "12.4 First Booting",
+    "text": "12.4 First Booting\nIf the compose file is started for the first time, mysql detects an empty data directory and creates the requested database and user (refer to environment variables passed to the mysql container).\nNote:\n\nThese environment variables are only evaluated if the data directory is empty. Changing them later has no effect on an existing volume.\n\nSince the docker-managed volume survives several downs and ups of the compose network, all data remain there, until someone manually deletes the volume in a terminal with docker volume rm mysql-data, or with docker compose down -v (which removes the containers together with the volumes declared in the compose file).",
+    "crumbs": [
+      "Docker Compose",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>DB Containers / Persistent Volumes</span>"
+    ]
+  },
+  {
+    "objectID": "content/03-docker-compose/03-db-phpmyadmin/Readme.html#exercise",
+    "href": "content/03-docker-compose/03-db-phpmyadmin/Readme.html#exercise",
+    "title": "12  DB Containers / Persistent Volumes",
+    "section": "12.5 Exercise",
+    "text": "12.5 Exercise\n\n12.5.1 Database hidden\n\nBoot the compose network\n\nOn the very first start, MySQL needs some time (up to about a minute) to create the database. Until then, the login fails. Watch docker logs -f dev_mysql until you see ready for connections together with port: 3306 (stop watching with Ctrl+C). An earlier line with port: 0 belongs to a temporary setup server - keep waiting.\n\nTest the web interface in your favourite browser : http://localhost:8183\n\nLogin with root/root or user/user\nTest various host names in the Server field of the login dialog: mysql (service name), dev_mysql (container name), the IP address of the container (find it with docker network inspect backend) and localhost.\nWhy does localhost not work? (Hint: inside the phpMyAdmin container, localhost means the phpMyAdmin container itself.)\n\nCreate a new table with some columns\nShut down the network with docker compose down.\nBoot again, login to the database in the browser and inspect the new table.\n\n\n\n12.5.2 Database with external port mapping\n\nTry to connect to the database from an external sql browser (like JetBrains DataGrip, HeidiSQL or similar) =&gt; should not be possible.\nChange the compose file and add a port mapping for the mysql container (remove the # in the commented ports lines), then run docker compose up -d again.\n\nIf you get port is already allocated, another MySQL (e.g. from XAMPP) is running on your computer. Stop it, or use another host port, e.g. 3307:3306.\n\nTry again to connect to the database from an external sql browser =&gt; should work now! (Host localhost, port 3306, user user, password user)\nClean up: docker compose down (the volume mysql-data stays; docker compose down -v deletes it too)\n\nNote: Passwords written directly into a compose file are fine for a local development setup, but never for a real server.",
+    "crumbs": [
+      "Docker Compose",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>DB Containers / Persistent Volumes</span>"
+    ]
+  },
+  {
+    "objectID": "content/03-docker-compose/04-wordpress-network/Readme.html",
+    "href": "content/03-docker-compose/04-wordpress-network/Readme.html",
+    "title": "13  Wordpress with docker compose",
+    "section": "",
+    "text": "13.1 First boot\nThis example manages three different containers in a compose file:\nNo networks: section is given here, so all three containers are placed in the default network of this compose project (04-wordpress-network_default). They can still reach each other by service name.",
+    "crumbs": [
+      "Docker Compose",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Wordpress with docker compose</span>"
+    ]
+  },
+  {
+    "objectID": "content/03-docker-compose/04-wordpress-network/Readme.html#first-boot",
+    "href": "content/03-docker-compose/04-wordpress-network/Readme.html#first-boot",
+    "title": "13  Wordpress with docker compose",
+    "section": "",
+    "text": "Before you start: run docker compose down in the folders of the previous compose exercises. This example uses the same host ports (8080, 8183) and the same container name dev_pma.\nStart with docker compose up -d.\nOpen http://localhost:8080. If the wordpress container is visited the first time, it will ask for an initial installation, including the database connection data.\nphpMyAdmin is available at http://localhost:8183 (user wordpress, password wordpress).",
+    "crumbs": [
+      "Docker Compose",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Wordpress with docker compose</span>"
+    ]
+  },
+  {
+    "objectID": "content/03-docker-compose/04-wordpress-network/Readme.html#exercise",
+    "href": "content/03-docker-compose/04-wordpress-network/Readme.html#exercise",
+    "title": "13  Wordpress with docker compose",
+    "section": "13.2 Exercise",
+    "text": "13.2 Exercise\nFind out, how you can configure the wordpress container, so the initial installation does not ask for database connection data anymore.\nHints:\n\nLook at the documentation of the image on Docker Hub: https://hub.docker.com/_/wordpress, section How to use this image. Look for environment variables starting with WORDPRESS_DB_.\nWhich values do you need? Compare with the environment section of the mysql service: host name, user, password, database name.\nAfter changing the compose file, run docker compose up -d again. Compose recreates only the changed container.\nIf the page shows an error (Error establishing a database connection or HTTP 500) right after the start, the database is still starting. Wait a few seconds and reload.\n\nExpected result: http://localhost:8080 skips the database step. After choosing the language, it directly asks for the site title, admin user name and password.",
+    "crumbs": [
+      "Docker Compose",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Wordpress with docker compose</span>"
+    ]
+  },
+  {
+    "objectID": "content/03-docker-compose/04-wordpress-network/Readme.html#check-yourself",
+    "href": "content/03-docker-compose/04-wordpress-network/Readme.html#check-yourself",
+    "title": "13  Wordpress with docker compose",
+    "section": "13.3 Check yourself",
+    "text": "13.3 Check yourself\nYou have finished compose exercises 3 and 4. Take the self-check quiz on volumes, databases and WordPress: 5 short questions, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.",
+    "crumbs": [
+      "Docker Compose",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Wordpress with docker compose</span>"
+    ]
+  }
+]

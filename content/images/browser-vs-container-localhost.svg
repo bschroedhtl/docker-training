@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13" fill="#1f2937">
+  <title>Browser localhost vs. container localhost</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f2937"/>
+    </marker>
+  </defs>
+
+  <!-- background (white, so the diagram is readable in dark mode too) -->
+  <rect width="960" height="560" fill="#ffffff"/>
+
+  <!-- host computer -->
+  <rect x="20" y="30" width="920" height="510" rx="14" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+  <text x="40" y="60" font-size="16" font-weight="bold">Your computer (host)  =  localhost</text>
+
+  <!-- browser -->
+  <rect x="40" y="100" width="240" height="330" rx="10" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>
+  <text x="160" y="126" text-anchor="middle" font-size="15" font-weight="bold">Browser</text>
+  <rect x="55" y="145" width="210" height="30" rx="15" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text x="160" y="165" text-anchor="middle" font-family="Consolas, Menlo, monospace" font-size="12">http://localhost:8888</text>
+  <rect x="55" y="190" width="210" height="95" rx="6" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="160" y="232" text-anchor="middle">web page (index.html)</text>
+  <text x="160" y="252" text-anchor="middle" fill="#475569">with 5 buttons</text>
+  <rect x="55" y="300" width="210" height="115" rx="6" fill="#fef9c3" stroke="#ca8a04"/>
+  <text x="160" y="322" text-anchor="middle" font-weight="bold">index.js runs HERE</text>
+  <text x="160" y="348" text-anchor="middle" font-family="Consolas, Menlo, monospace" font-size="11">fetch('http://localhost:3000</text>
+  <text x="160" y="364" text-anchor="middle" font-family="Consolas, Menlo, monospace" font-size="11">/api/fruits')</text>
+  <text x="160" y="392" text-anchor="middle" font-size="12">localhost = your computer</text>
+
+  <!-- docker area -->
+  <rect x="470" y="80" width="450" height="400" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="7 5"/>
+  <text x="900" y="102" text-anchor="end" font-size="15" font-weight="bold" fill="#1d4ed8">Docker</text>
+
+  <!-- published ports ("doors" in the host) -->
+  <rect x="452" y="138" width="36" height="110" rx="5" fill="#dbeafe" stroke="#2563eb"/>
+  <text transform="translate(475 193) rotate(-90)" text-anchor="middle" font-size="12" font-weight="bold" fill="#1d4ed8">-p 8888:80</text>
+  <rect x="452" y="322" width="36" height="96" rx="5" fill="#dbeafe" stroke="#2563eb"/>
+  <text transform="translate(475 370) rotate(-90)" text-anchor="middle" font-size="12" font-weight="bold" fill="#1d4ed8">-p 3000:3000</text>
+
+  <!-- frontend container -->
+  <rect x="560" y="125" width="340" height="140" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="730" y="150" text-anchor="middle" font-size="14" font-weight="bold">Container fruit-frontend</text>
+  <text x="730" y="172" text-anchor="middle">image: nginx · listens on port 80</text>
+  <text x="730" y="192" text-anchor="middle">sends index.html + index.js to the browser</text>
+  <text x="730" y="222" text-anchor="middle" fill="#b91c1c">✗ localhost:3000 in here = this container,</text>
+  <text x="730" y="241" text-anchor="middle" fill="#b91c1c">and there is no backend inside it!</text>
+
+  <!-- backend container -->
+  <rect x="560" y="315" width="340" height="115" rx="10" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="730" y="342" text-anchor="middle" font-size="14" font-weight="bold">Container fruit-backend</text>
+  <text x="730" y="365" text-anchor="middle">image: distroless node · listens on port 3000</text>
+  <text x="730" y="388" text-anchor="middle">GET /api/fruits  →  ["apple", "banana", …]</text>
+
+  <!-- 1: page request -->
+  <line x1="265" y1="160" x2="452" y2="160" stroke="#1f2937" stroke-width="2"/>
+  <line x1="488" y1="160" x2="558" y2="160" stroke="#1f2937" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="366" y="151" text-anchor="middle" font-weight="bold">① GET localhost:8888</text>
+  <!-- 2: page response -->
+  <line x1="560" y1="232" x2="488" y2="232" stroke="#1f2937" stroke-width="2" stroke-dasharray="6 4"/>
+  <line x1="452" y1="232" x2="267" y2="232" stroke="#1f2937" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+  <text x="366" y="223" text-anchor="middle">② index.html + index.js</text>
+  <!-- 3: api request from the browser -->
+  <line x1="265" y1="345" x2="452" y2="345" stroke="#1f2937" stroke-width="2"/>
+  <line x1="488" y1="345" x2="558" y2="345" stroke="#1f2937" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="366" y="336" text-anchor="middle" font-weight="bold">③ fetch localhost:3000</text>
+  <!-- 4: api response -->
+  <line x1="560" y1="398" x2="488" y2="398" stroke="#1f2937" stroke-width="2" stroke-dasharray="6 4"/>
+  <line x1="452" y1="398" x2="267" y2="398" stroke="#1f2937" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+  <text x="366" y="389" text-anchor="middle">④ JSON with the fruits</text>
+
+  <!-- rule -->
+  <text x="480" y="507" text-anchor="middle" font-size="14" font-weight="bold">Rule: localhost always means the machine where the code is running.</text>
+  <text x="480" y="527" text-anchor="middle" font-size="13">index.js comes from the frontend container, but runs in your browser → the backend needs the host port 3000.</text>
+</svg>
