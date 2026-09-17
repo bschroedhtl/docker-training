@@ -139,7 +139,7 @@
     "href": "content/01-containers/Readme.html#check-yourself",
     "title": "1  Container commands",
     "section": "1.5 Check yourself",
-    "text": "1.5 Check yourself\nWhen you have finished all exercises, take the self-check quiz for this chapter: 5 short questions, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.",
+    "text": "1.5 Check yourself\nWhen you have finished all exercises, take the self-check quiz for this chapter: 5 short questions, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.\n\n\n\n\n\n\nNoteSelf-check quiz for this chapter\n\n\n\n\n▶ Take the quiz on novedu.at",
     "crumbs": [
       "Containers",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Container commands</span>"
@@ -315,7 +315,7 @@
     "href": "content/02-dockerfiles/02-static-web-page/Readme.html#check-yourself",
     "title": "4  Publish Static Web Page",
     "section": "4.5 Check yourself",
-    "text": "4.5 Check yourself\nYou have finished the first two Dockerfile exercises. Take the self-check quiz on Dockerfile basics: 5 short questions about the chapter overview, Hello World and this exercise, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.",
+    "text": "4.5 Check yourself\nYou have finished the first two Dockerfile exercises. Take the self-check quiz on Dockerfile basics: 5 short questions about the chapter overview, Hello World and this exercise, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.\n\n\n\n\n\n\nNoteSelf-check quiz on Dockerfile basics\n\n\n\n\n▶ Take the quiz on novedu.at",
     "crumbs": [
       "Dockerfiles",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Publish Static Web Page</span>"
@@ -458,7 +458,7 @@
     "href": "content/02-dockerfiles/04-java-socket-server/Readme.html#check-yourself",
     "title": "6  Multistage Dockerfiles",
     "section": "6.6 Check yourself",
-    "text": "6.6 Check yourself\nYou have finished exercises 3 and 4. Take the self-check quiz on app images and multi-stage builds: 5 short questions about the Express backend and this Java multi-stage build, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.",
+    "text": "6.6 Check yourself\nYou have finished exercises 3 and 4. Take the self-check quiz on app images and multi-stage builds: 5 short questions about the Express backend and this Java multi-stage build, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.\n\n\n\n\n\n\nNoteSelf-check quiz on app images and multi-stage builds\n\n\n\n\n▶ Take the quiz on novedu.at",
     "crumbs": [
       "Dockerfiles",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Multistage Dockerfiles</span>"
@@ -557,7 +557,7 @@
     "href": "content/02-dockerfiles/06-ts-frontend/Readme.html#check-yourself",
     "title": "8  Hosting Dynamic Website with nginx",
     "section": "8.4 Check yourself",
-    "text": "8.4 Check yourself\nYou have finished exercises 5 and 6 (think about the question above first). Take the self-check quiz on the TypeScript backend and frontend images: 5 short questions, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.",
+    "text": "8.4 Check yourself\nYou have finished exercises 5 and 6 (think about the question above first). Take the self-check quiz on the TypeScript backend and frontend images: 5 short questions, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.\n\n\n\n\n\n\nNoteSelf-check quiz on the TypeScript backend and frontend images\n\n\n\n\n▶ Take the quiz on novedu.at",
     "crumbs": [
       "Dockerfiles",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Hosting Dynamic Website with nginx</span>"
@@ -568,7 +568,7 @@
     "href": "content/03-docker-compose/Readme.html",
     "title": "9  Container Orchestration with docker compose",
     "section": "",
-    "text": "Stuck or have a question? Ask the AI tutor for this chapter. It knows this chapter and all its exercises, and helps you with compose files, networks, volumes and error messages. For the exercises where you write the compose file yourself, it gives you hints, not the solution. You can ask in German or English.\n\n\nCompose a single container\nCompose multiple containers and networks\n\nSelf-check: quiz on compose basics and networks (exercises 1 and 2)\n\nDB containers and persistent volumes\nWordpress, phpMyAdmin, mariadb\n\nSelf-check: quiz on volumes, databases and WordPress (exercises 3 and 4)\n\nFull Typescript Stack (coming soon)",
+    "text": "TipStuck or have a question?\n\n\n\nAsk the AI tutor for this chapter. It knows this chapter and all its exercises, and helps you with compose files, networks, volumes and error messages. For the exercises where you write the compose file yourself, it gives you hints, not the solution. You can ask in German or English.\n\n▶ Ask the Docker tutor on novedu.at\n\n\n\n\nCompose a single container\nCompose multiple containers and networks\n\nSelf-check: quiz on compose basics and networks (exercises 1 and 2)\n\nDB containers and persistent volumes\nWordpress, phpMyAdmin, mariadb\n\nSelf-check: quiz on volumes, databases and WordPress (exercises 3 and 4)\n\nFull Typescript Stack (coming soon)",
     "crumbs": [
       "Docker Compose",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Container Orchestration with `docker compose`</span>"
@@ -656,7 +656,7 @@
     "href": "content/03-docker-compose/02-compose-multiple-containers/Readme.html#check-yourself",
     "title": "11  Exercise: Compose container network",
     "section": "11.4 Check yourself",
-    "text": "11.4 Check yourself\nYou have finished compose exercises 1 and 2 (think about the question above first). Take the self-check quiz on compose basics and networks: 5 short questions, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.",
+    "text": "11.4 Check yourself\nYou have finished compose exercises 1 and 2 (think about the question above first). Take the self-check quiz on compose basics and networks: 5 short questions, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.\n\n\n\n\n\n\nNoteSelf-check quiz on compose basics and networks\n\n\n\n\n▶ Take the quiz on novedu.at",
     "crumbs": [
       "Docker Compose",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Exercise: Compose container network</span>"
@@ -766,7 +766,7 @@
     "href": "content/03-docker-compose/04-wordpress-network/Readme.html#check-yourself",
     "title": "13  Wordpress with docker compose",
     "section": "13.3 Check yourself",
-    "text": "13.3 Check yourself\nYou have finished compose exercises 3 and 4. Take the self-check quiz on volumes, databases and WordPress: 5 short questions, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.",
+    "text": "13.3 Check yourself\nYou have finished compose exercises 3 and 4. Take the self-check quiz on volumes, databases and WordPress: 5 short questions, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.\n\n\n\n\n\n\nNoteSelf-check quiz on volumes, databases and WordPress\n\n\n\n\n▶ Take the quiz on novedu.at",
     "crumbs": [
       "Docker Compose",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Wordpress with docker compose</span>"

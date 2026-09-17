@@ -306,7 +306,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="test" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="test"><span class="header-section-number">5.4</span> Test</h2>
 <ul>
-<li>Open http://localhost:3000 in your browser. It should display <code>Hello World!</code></li>
+<li>Open <a href="http://localhost:3000" class="uri">http://localhost:3000</a> in your browser. It should display <code>Hello World!</code></li>
 <li><code>docker logs &lt;container&gt;</code> should show <code>Example app listening on port 3000!</code></li>
 </ul>
 </section>
@@ -314,7 +314,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="5.5" class="anchored" data-anchor-id="dockerignore"><span class="header-section-number">5.5</span> Dockerignore</h2>
 <p>Note the file <code>.dockerignore</code> which excludes files matching the given rules from the build context, so <code>COPY</code> (and <code>ADD</code>) cannot copy them into the image.</p>
 <p>Hence we can avoid that files like Readme.md and the Dockerfile itself will be copied to the image, since they are not needed for running the application. Even more important: a local <code>node_modules</code> folder is excluded too, so it cannot overwrite the dependencies installed by <code>npm install</code> inside the image.</p>
-<p>Refer to https://docs.docker.com/build/concepts/context/#dockerignore-files</p>
+<p>Refer to <a href="https://docs.docker.com/build/concepts/context/#dockerignore-files" class="uri">https://docs.docker.com/build/concepts/context/#dockerignore-files</a></p>
 
 
 </section>

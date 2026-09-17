@@ -298,7 +298,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="7.2" class="anchored" data-anchor-id="dockerfile"><span class="header-section-number">7.2</span> Dockerfile</h2>
 <p>A typescript app involves a compilation (transpilation) step, which needs the full <code>node</code> image including <code>npm</code> and the TypeScript compiler. For launching the transpiled <code>app.js</code> file, however, only the Node.js runtime is required. Google’s <strong>distroless</strong> images contain nothing but the runtime (no shell, no package manager), so the final image is only a fraction of the size of the full <code>node</code> image (check the difference with <code>docker images</code>).</p>
 <ul>
-<li>Refer to: https://github.com/GoogleContainerTools/distroless</li>
+<li>Refer to: <a href="https://github.com/GoogleContainerTools/distroless" class="uri">https://github.com/GoogleContainerTools/distroless</a></li>
 </ul>
 <p>So it definitely makes sense to split the Dockerfile into two stages.</p>
 <section id="step-1-build-stage" class="level3" data-number="7.2.1">
@@ -372,7 +372,7 @@ docker run -p 3000:3000 -d fruit-backend</code></pre>
 <p>Test the endpoints in VS Code with <code>requests.http</code>. This needs the VS Code extension <a href="https://marketplace.visualstudio.com/items?itemName=humao.rest-client">REST Client</a>: click <code>Send Request</code> above a request.</p>
 <ul>
 <li><code>GET http://localhost:3000/api/fruits</code> should return <code>["apple","banana","peach"]</code>.</li>
-<li>Quick check without VS Code: open http://localhost:3000/api/fruits in your browser.</li>
+<li>Quick check without VS Code: open <a href="http://localhost:3000/api/fruits" class="uri">http://localhost:3000/api/fruits</a> in your browser.</li>
 </ul>
 
 

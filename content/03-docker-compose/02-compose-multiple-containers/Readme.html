@@ -48,6 +48,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../site_libs/bootstrap/bootstrap-aae1decb7c0a57a761683734fafe0f97.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/quarto-contrib/quarto-novedu-1.0.0/novedu.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -301,7 +302,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Networks are declared in a top-level <code>networks:</code> section, similar to <code>services:</code>. Look up the syntax in the compose reference: <a href="https://docs.docker.com/reference/compose-file/networks/">networks</a> (see <code>name</code>, <code>driver</code> and <code>ipam</code>).</li>
 <li>Each service lists the networks it belongs to in its own <code>networks:</code> list.</li>
 <li>Without <code>name:</code>, compose would put the folder name in front of the network name.</li>
-<li>Test: http://localhost:8081 should show the A-service, http://localhost:8082 the B-service.</li>
+<li>Test: <a href="http://localhost:8081" class="uri">http://localhost:8081</a> should show the A-service, <a href="http://localhost:8082" class="uri">http://localhost:8082</a> the B-service.</li>
 </ul>
 <p>Only if you are stuck: a solution is in <a href="./solution/compose.yaml">solution/compose.yaml</a>. Start it from this folder with <code>docker compose -f solution/compose.yaml up -d</code> (and stop it with <code>docker compose -f solution/compose.yaml down</code>).</p>
 </section>
@@ -333,7 +334,7 @@ c1e104106b4b   nginx     "/docker-entrypoint.…"   6 minutes ago   Up 6 minutes
 <p>Note:</p>
 <ul>
 <li>This DNS resolution only works in user-defined networks (like the ones created by compose). Containers in the default <code>bridge</code> network can only reach each other by IP address.</li>
-<li>Refer to https://docs.docker.com/engine/network/drivers/bridge/</li>
+<li>Refer to <a href="https://docs.docker.com/engine/network/drivers/bridge/" class="uri">https://docs.docker.com/engine/network/drivers/bridge/</a></li>
 </ul>
 <p>We can experience this by using the <code>ping</code> utility.</p>
 <section id="execute-bash-in-weba" class="level3" data-number="11.3.1">
@@ -362,7 +363,22 @@ PING webB (10.2.0.2) 56(84) bytes of data.
 </section>
 <section id="check-yourself" class="level2" data-number="11.4">
 <h2 data-number="11.4" class="anchored" data-anchor-id="check-yourself"><span class="header-section-number">11.4</span> Check yourself</h2>
-<p>You have finished compose exercises 1 and 2 (think about the question above first). Take the <a href="https://novedu.at/s5auifuphk">self-check quiz on compose basics and networks</a>: 5 short questions, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.</p>
+<p>You have finished compose exercises 1 and 2 (think about the question above first). Take the self-check quiz on compose basics and networks: 5 short questions, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Self-check quiz on compose basics and networks
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="novedu-cta novedu-cta-quiz">
+<p><a href="https://novedu.at/s5auifuphk">▶ Take the quiz on novedu.at</a></p>
+</div>
+</div>
+</div>
 
 
 </section>

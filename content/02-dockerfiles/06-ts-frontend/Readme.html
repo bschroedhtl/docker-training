@@ -48,6 +48,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../site_libs/bootstrap/bootstrap-aae1decb7c0a57a761683734fafe0f97.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/quarto-contrib/quarto-novedu-1.0.0/novedu.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -333,7 +334,7 @@ COPY --from=builder /app/public /usr/share/nginx/html</code></pre>
 <pre><code>cd src
 docker build -t fruit-frontend .
 docker run -p 8888:80 -d fruit-frontend</code></pre>
-<p>Test the URL http://localhost:8888 in your browser.</p>
+<p>Test the URL <a href="http://localhost:8888" class="uri">http://localhost:8888</a> in your browser.</p>
 <ul>
 <li>You should see five buttons. With the backend from the previous exercise running on port 3000, <code>GET /api/fruits</code> shows <code>apple,banana,peach</code>.</li>
 <li>Now stop the backend container and click the buttons again. Most buttons show nothing new on the page (the two <code>.../0</code> buttons show <code>fruit not found</code>). Open the browser developer tools (<code>F12</code> → tab <strong>Console</strong>) to see the real error messages.</li>
@@ -354,7 +355,22 @@ docker run -p 8888:80 -d fruit-frontend</code></pre>
 </section>
 <section id="check-yourself" class="level2" data-number="8.4">
 <h2 data-number="8.4" class="anchored" data-anchor-id="check-yourself"><span class="header-section-number">8.4</span> Check yourself</h2>
-<p>You have finished exercises 5 and 6 (think about the question above first). Take the <a href="https://novedu.at/fw0939tqgt">self-check quiz on the TypeScript backend and frontend images</a>: 5 short questions, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.</p>
+<p>You have finished exercises 5 and 6 (think about the question above first). Take the self-check quiz on the TypeScript backend and frontend images: 5 short questions, answered in your own words (German or English). The AI gives you feedback on each answer, and you can ask follow-up questions. You can repeat the quiz as often as you like.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Self-check quiz on the TypeScript backend and frontend images
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="novedu-cta novedu-cta-quiz">
+<p><a href="https://novedu.at/fw0939tqgt">▶ Take the quiz on novedu.at</a></p>
+</div>
+</div>
+</div>
 
 
 </section>

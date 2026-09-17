@@ -320,8 +320,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>Refer to:</p>
 <ul>
-<li>https://docs.docker.com/engine/storage/ (overview of volumes, bind mounts and tmpfs mounts)</li>
-<li>https://docs.docker.com/engine/storage/volumes/</li>
+<li><a href="https://docs.docker.com/engine/storage/" class="uri">https://docs.docker.com/engine/storage/</a> (overview of volumes, bind mounts and tmpfs mounts)</li>
+<li><a href="https://docs.docker.com/engine/storage/volumes/" class="uri">https://docs.docker.com/engine/storage/volumes/</a></li>
 </ul>
 </section>
 <section id="phpmyadmin" class="level2" data-number="12.3">
@@ -378,7 +378,7 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>On the very first start, MySQL needs some time (up to about a minute) to create the database. Until then, the login fails. Watch <code>docker logs -f dev_mysql</code> until you see <code>ready for connections</code> together with <code>port: 3306</code> (stop watching with <code>Ctrl+C</code>). An earlier line with <code>port: 0</code> belongs to a temporary setup server - keep waiting.</li>
 </ul></li>
-<li>Test the web interface in your favourite browser : http://localhost:8183
+<li>Test the web interface in your favourite browser : <a href="http://localhost:8183" class="uri">http://localhost:8183</a>
 <ul>
 <li>Login with root/root or user/user</li>
 <li>Test various host names in the <code>Server</code> field of the login dialog: <code>mysql</code> (service name), <code>dev_mysql</code> (container name), the IP address of the container (find it with <code>docker network inspect backend</code>) and <code>localhost</code>.</li>
