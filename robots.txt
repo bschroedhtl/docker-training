@@ -1,0 +1,1 @@
+Sitemap: https://bschroedhtl.github.io/docker-training/sitemap.xml
